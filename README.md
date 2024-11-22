@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Thats just a test repo i've created to understand the problem of accessing user data by SSC (Server side components) in Next.js.
 
-## Getting Started
+So if you are facing the problem that the server side helpers auth( ) and currentUser( ) are returning null, it may be your
+pc time stamp config, so i'll show how you 'can' fix this for the time being.
 
-First, run the development server:
+By the way, now i'm using Next 15. But i guess, that it might be work to you if u are using an old version.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+example:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+user.actions.ts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+'use server'
+...imports
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+export async function getUser() {
 
-## Learn More
+  const {userId} = await auth(); -> returns null;
+  const user = await currentUser() -> return null;
+}
 
-To learn more about Next.js, take a look at the following resources:
+##Linux
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Idk how to solve it on linux, but you can adjust your time stamp by the terminal, that's the
+code that CHAT GPT generated for me: sudo ntpdate -u time.google.com
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+##Windows
 
-## Deploy on Vercel
+So, you must open the control panel first, and select this option:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![image](https://github.com/user-attachments/assets/54eb5ea3-ca0b-4a2c-a1a9-12475baa1d99)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+After, u should config your time stamp:
+
+![image](https://github.com/user-attachments/assets/b9ff413e-873a-4058-b9ce-d5112a4fc5e7)
+
+Select THIS option: 
+
+![image](https://github.com/user-attachments/assets/5591dde2-9b8e-4407-97a2-173bca34e880)
+
+To sync your time stamp with internet....it should be diferent for each region...so you must know
+what use.
+
+After that, u can try to test the application, to see if you can access the user data by server side components.
+
+I hope i've helped you, because i've faced this problem for a few days💀
